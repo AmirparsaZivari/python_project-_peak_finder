@@ -1,0 +1,7 @@
+- create script/module with all functions/plotting module
+- import and fit real data
+- extract fitting parameters
+- function to determine fit parameters robustly
+- create a function that splits data into multiple peaks (determine number of peaks)
+- create funciton to convert with and distance indexes to coresponding x-values
+- determine noise standard deviation
