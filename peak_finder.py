@@ -121,7 +121,10 @@ def mult_lorentz(x,params):
         
     return my_fun
 
-x = np.linspace(0,10,100)
+x1 = np.linspace(0,5,100)
+x2 = np.linspace(5.1,8,1000)
+x3 = np.linspace(8.2,10,100)
+x = np.concatenate((x1,x2,x3))
 
 params = np.array([0,5,0.1,5,0,10,1,7,0,7,0.5,9])
 # params = np.array([0,5,100e6,5e9])
@@ -153,7 +156,7 @@ print(type(res_fun(params,x,fx_noisy)))
 
 [1,2] +[3,4]
 
-peaks2 , prop2 = find_peaks(fx_noisy, prominence = 1)
+peaks2 , prop2 = find_peaks(fx_noisy, prominence = 3)
 # print(type(peaks_2))
 plt.scatter(x[peaks2],fx_noisy[peaks2],color = 'red')
 plt.plot(x,fx_noisy)
