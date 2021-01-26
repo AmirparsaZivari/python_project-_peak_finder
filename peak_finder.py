@@ -121,11 +121,13 @@ def mult_lorentz(x,params):
         
     return my_fun
 
-params = np.array([0,5,100e6,5e9,0,10,1e9,6e9,0,7,500e6,9e9])
+x = np.linspace(0,10,100)
+
+params = np.array([0,5,0.1,5,0,10,1,7,0,7,0.5,9])
 # params = np.array([0,5,100e6,5e9])
 fx = mult_lorentz(x,params)
 plt.plot(x,fx)
-fx_noisy = fx + np.random.normal(2,0.5,1000)
+fx_noisy = fx + np.random.normal(2,0.3,np.size(x))
 plt.plot(x,fx_noisy)
 # -
 
@@ -151,20 +153,21 @@ print(type(res_fun(params,x,fx_noisy)))
 
 [1,2] +[3,4]
 
-peaks2 , prop2 = find_peaks(fx_noisy, prominence = 5)
+peaks2 , prop2 = find_peaks(fx_noisy, prominence = 1)
 # print(type(peaks_2))
 plt.scatter(x[peaks2],fx_noisy[peaks2],color = 'red')
 plt.plot(x,fx_noisy)
 len(peaks2)
 
 # +
-general_gamma = 500e6
-start = [0,5,1e9,general_gamma]
+general_gamma = 0.1
+# start = [0,5,1,general_gamma]
 start = []
-f0 = 1e9
+
 for ii in range(len(peaks2)):
-    start = start + [0,10,general_gamma,f0]
-    f0 = f0+1e9
+    start = start + [0,10,general_gamma,x[peaks2[ii]]]
+    print(x[peaks2[ii]])
+#     f0 = f0+2
     
 print(start)
 
@@ -177,5 +180,6 @@ popt[1]
 fitted = mult_lorentz(x,popt)
 
 plt.plot(x,fitted)
+plt.plot(x,fx_noisy)
 
 
